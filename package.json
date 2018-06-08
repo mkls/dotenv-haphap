@@ -1,0 +1,19 @@
+{
+  "name": "dotenv-dot-env",
+  "version": "1.0.0",
+  "description": "Load multiple dotenv files",
+  "main": "dotenv-dot-env.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkls/dotenv-dot-env.git"
+  },
+  "author": "mkls",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkls/dotenv-dot-env/issues"
+  },
+  "homepage": "https://github.com/mkls/dotenv-dot-env#readme"
+}
