@@ -1,2 +1,2 @@
-# dotenv-dot-env
+# dotenv-comma-dotenv
 Load multiple dotenv files
