@@ -61,8 +61,10 @@ const setEnv = parsedEnv => {
 };
 
 module.exports = {
-  dotenv(paths) {
+  load(paths) {
+    paths = paths || '.env';
     const parsed = paths
+      .split(',')
       .map(loadEnvsFile)
       .map(parse)
       .reduce((accu, item) => Object.assign(accu, item), {});
