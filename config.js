@@ -9,7 +9,7 @@ function getCliPath() {
   const matchingOption = process.argv.find(arg => arg.match(re));
 
   if (matchingOption) {
-    const matches = cur.match(re);
+    const matches = matchingOption.match(re);
     return matches[1];
   } else {
     return null;
