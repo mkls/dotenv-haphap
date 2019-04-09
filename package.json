@@ -1,9 +1,8 @@
 {
   "name": "dotenv-haphap",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "dotenv with multiple dotenv file support",
   "main": "main.js",
-  "bin": "cli.js",
   "scripts": {
     "test": "echo 'haphap'"
   },
