@@ -3,6 +3,20 @@
 const fs = require('fs');
 const path = require('path');
 
+
+module.exports = {
+  config(paths) {
+    paths = paths || '.env';
+    const parsed = paths
+      .split(',')
+      .map(loadEnvsFile)
+      .map(parse)
+      .reduce((accu, item) => Object.assign(accu, item), {});
+    setEnv(parsed);
+    return parsed;
+  }
+};
+
 /*
  * (stolen from dotenv)
  * Parses a string or buffer into an object
@@ -58,17 +72,4 @@ const setEnv = parsedEnv => {
       process.env[key] = parsedEnv[key];
     }
   });
-};
-
-module.exports = {
-  load(paths) {
-    paths = paths || '.env';
-    const parsed = paths
-      .split(',')
-      .map(loadEnvsFile)
-      .map(parse)
-      .reduce((accu, item) => Object.assign(accu, item), {});
-    setEnv(parsed);
-    return parsed;
-  }
 };

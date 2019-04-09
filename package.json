@@ -2,7 +2,7 @@
   "name": "dotenv-dot-env",
   "version": "1.0.0",
   "description": "Load multiple dotenv files",
-  "main": "dotenv-dot-env.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
