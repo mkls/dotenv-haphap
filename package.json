@@ -1,15 +1,25 @@
 {
-  "name": "dotenv-dot-env",
-  "version": "1.0.0",
-  "description": "Load multiple dotenv files",
+  "name": "dotenv-haphap",
+  "version": "2.0.0",
+  "description": "dotenv with multiple dotenv file support",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo 'haphap'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mkls/dotenv-dot-env.git"
   },
+  "keywords": [
+    "dotenv",
+    "env",
+    ".env",
+    "environment",
+    "variables",
+    "config",
+    "settings"
+  ],
+  "readmeFilename": "README.md",
   "author": "mkls",
   "license": "ISC",
   "bugs": {
