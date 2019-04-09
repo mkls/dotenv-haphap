@@ -3,7 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 
-
 module.exports = {
   config(paths) {
     paths = paths || '.env';
