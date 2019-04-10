@@ -3,7 +3,7 @@
 const dotenvHaphap = require('./main');
 
 const paths = (getPathsFromEnv() || getPathsFromCli() || '.env').split(',');
-dotenvHaphap(...paths);
+dotenvHaphap.config(...paths);
 
 function getPathsFromEnv() {
   return process.env.DOTENV_PATHS || null
