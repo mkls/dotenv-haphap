@@ -18,7 +18,7 @@ npm install dotenv-haphap
 As early as possible in your application, require and configure dotenv-haphap.
 
 ```javascript
-require('dotenv-haphap').config('.env,confidential.env')
+require('dotenv-haphap').config('.env', 'confidential.env')
 ```
 
 It will never modify any environment variables that have already been set.

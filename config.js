@@ -1,6 +1,9 @@
 'use strict';
 
-require('./main').config(getPathsFromEnv() || getPathsFromCli() || '.env');
+const dotenvHaphap = require('./main');
+
+const paths = (getPathsFromEnv() || getPathsFromCli() || '.env').split(',');
+dotenvHaphap(...paths);
 
 function getPathsFromEnv() {
   return process.env.DOTENV_PATHS || null

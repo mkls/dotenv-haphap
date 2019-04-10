@@ -4,10 +4,11 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
-  config(paths) {
-    paths = paths || '.env';
+  config(...paths) {
+    if (paths.length === 0) {
+      paths = ['.env'];
+    }
     const parsed = paths
-      .split(',')
       .map(loadEnvsFile)
       .map(parse)
       .reduce((accu, item) => Object.assign(accu, item), {});
