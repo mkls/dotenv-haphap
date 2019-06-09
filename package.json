@@ -4,7 +4,8 @@
   "description": "dotenv with multiple dotenv file support",
   "main": "main.js",
   "scripts": {
-    "test": "echo 'haphap'"
+    "test": "tape tests/*.spec.js",
+    "tdd": "tape-watcher tests/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/mkls/dotenv-dot-env/issues"
   },
-  "homepage": "https://github.com/mkls/dotenv-dot-env#readme"
+  "homepage": "https://github.com/mkls/dotenv-dot-env#readme",
+  "devDependencies": {
+    "tape": "^4.10.2",
+    "tape-watcher": "0.0.7"
+  }
 }

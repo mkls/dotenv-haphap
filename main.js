@@ -22,7 +22,7 @@ module.exports = {
  * Parses a string or buffer into an object
  * @param {(string|Buffer)} src - source to be parsed
  * @returns {Object} keys and values from src
-*/
+ */
 function parse(src) {
   const obj = {};
 
@@ -34,23 +34,31 @@ function parse(src) {
       // matching "KEY' and 'VAL' in 'KEY=VAL'
       const keyValueArr = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
       // matched?
-      if (keyValueArr != null) {
-        const key = keyValueArr[1];
-
-        // default undefined or missing values to empty string
-        let value = keyValueArr[2] || '';
-
-        // expand newlines in quoted values
-        const len = value ? value.length : 0;
-        if (len > 0 && value.charAt(0) === '"' && value.charAt(len - 1) === '"') {
-          value = value.replace(/\\n/gm, '\n');
-        }
-
-        // remove any surrounding quotes and extra spaces
-        value = value.replace(/(^['"]|['"]$)/g, '').trim();
-
-        obj[key] = value;
+      if (keyValueArr === null) {
+        return;
       }
+
+      const key = keyValueArr[1];
+      // default undefined or missing values to empty string
+      let val = keyValueArr[2] || '';
+      const end = val.length - 1;
+      const isDoubleQuoted = val[0] === '"' && val[end] === '"';
+      const isSingleQuoted = val[0] === "'" && val[end] === "'";
+
+      // if single or double quoted, remove quotes
+      if (isSingleQuoted || isDoubleQuoted) {
+        val = val.substring(1, end);
+
+        // if double quoted, expand newlines
+        if (isDoubleQuoted) {
+          val = val.replace(/\\n/g, '\n');
+        }
+      } else {
+        // remove surrounding whitespace
+        val = val.trim();
+      }
+
+      obj[key] = val;
     });
 
   return obj;
