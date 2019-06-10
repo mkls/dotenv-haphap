@@ -78,5 +78,16 @@ test('parse', t => {
 
   t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by spaces');
 
+  t.equal(
+    parsed.MULTILINE,
+    'start-of-multiline\nLOOKS_LIKE_AN_ITEM=but-is-part-of-multiline\n"last line of multiline"',
+    'handles multiline items surrounded by back-tick'
+  );
+
+  t.equal(
+    parsed.LOOKS_LIKE_AN_ITEM,
+    undefined,
+    'does not parse item inside a multile item'
+  )
   t.end();
 });

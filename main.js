@@ -18,7 +18,6 @@ module.exports = {
 };
 
 /*
- * (stolen from dotenv)
  * Parses a string or buffer into an object
  * @param {(string|Buffer)} src - source to be parsed
  * @returns {Object} keys and values from src
@@ -30,9 +29,31 @@ function parse(src) {
   src
     .toString()
     .split('\n')
-    .forEach(function(line) {
+    .reduce(
+      ({ lines, currentMultiLine }, line) => {
+        if (currentMultiLine === null) {
+          const firtsEqualsSign = line.indexOf('=');
+          const startOfMultiline = line.indexOf('=`');
+          if (startOfMultiline === -1 || firtsEqualsSign !== startOfMultiline) {
+            return { lines: lines.concat(line), currentMultiLine: null };
+          } else {
+            return { lines, currentMultiLine: line };
+          }
+        } else {
+          const isLastPieceOfMultiline = line.match(/`$/);
+          const multilineSoFar = currentMultiLine + '\n' + line;
+          if (isLastPieceOfMultiline) {
+            return { lines: lines.concat(multilineSoFar), currentMultiLine: null };
+          } else {
+            return { lines, currentMultiLine: multilineSoFar };
+          }
+        }
+      },
+      { lines: [], currentMultiLine: null }
+    )
+    .lines.forEach(function(line) {
       // matching "KEY' and 'VAL' in 'KEY=VAL'
-      const keyValueArr = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+      const keyValueArr = line.match(/^\s*([\w.-]+)\s*=\s*([\s\S]*)?\s*/);
       // matched?
       if (keyValueArr === null) {
         return;
@@ -44,9 +65,9 @@ function parse(src) {
       const end = val.length - 1;
       const isDoubleQuoted = val[0] === '"' && val[end] === '"';
       const isSingleQuoted = val[0] === "'" && val[end] === "'";
+      const isBackTickQuoted = val[0] === '`' && val[end] === '`';
 
-      // if single or double quoted, remove quotes
-      if (isSingleQuoted || isDoubleQuoted) {
+      if (isSingleQuoted || isDoubleQuoted || isBackTickQuoted) {
         val = val.substring(1, end);
 
         // if double quoted, expand newlines
