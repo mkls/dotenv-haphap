@@ -34,7 +34,7 @@ function parse(src) {
         if (currentMultiLine === null) {
           const firtsEqualsSign = line.indexOf('=');
           const startOfMultiline = line.indexOf('=`');
-          if (startOfMultiline === -1 || firtsEqualsSign !== startOfMultiline) {
+          if (startOfMultiline === -1 || firtsEqualsSign !== startOfMultiline || line.endsWith('`')) {
             return { lines: lines.concat(line), currentMultiLine: null };
           } else {
             return { lines, currentMultiLine: line };

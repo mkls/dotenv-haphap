@@ -64,17 +64,9 @@ test('parse', t => {
 
   t.equal(parsed.RETAIN_INNER_QUOTES_AS_STRING, '{"foo": "bar"}', 'retains inner quotes');
 
-  t.equal(
-    parsed.TRIM_SPACE_FROM_UNQUOTED,
-    'some spaced out string',
-    'retains spaces in string'
-  );
+  t.equal(parsed.TRIM_SPACE_FROM_UNQUOTED, 'some spaced out string', 'retains spaces in string');
 
-  t.equal(
-    parsed.USERNAME,
-    'therealnerdybeast@example.tld',
-    'parses email addresses completely'
-  );
+  t.equal(parsed.USERNAME, 'therealnerdybeast@example.tld', 'parses email addresses completely');
 
   t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by spaces');
 
@@ -84,10 +76,10 @@ test('parse', t => {
     'handles multiline items surrounded by back-tick'
   );
 
-  t.equal(
-    parsed.LOOKS_LIKE_AN_ITEM,
-    undefined,
-    'does not parse item inside a multile item'
-  )
+  t.equal(parsed.LOOKS_LIKE_AN_ITEM, undefined, 'does not parse item inside a multile item');
+
+  t.equal(parsed.BACK_TICK_ON_SINGLE_LINE, '{}', 'parses backtick even if there is no linebreak in it');
+  t.equal(parsed.AFTER_SINGLE_LINE_BACK_TICK, '12', 'parses correctly after single line back ticks')
+
   t.end();
 });
