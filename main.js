@@ -34,7 +34,12 @@ function parse(src) {
         if (currentMultiLine === null) {
           const firtsEqualsSign = line.indexOf('=');
           const startOfMultiline = line.indexOf('=`');
-          if (startOfMultiline === -1 || firtsEqualsSign !== startOfMultiline || line.endsWith('`')) {
+          const lastTickIndex = line.lastIndexOf('`');
+          if (
+            startOfMultiline === -1 ||
+            firtsEqualsSign !== startOfMultiline ||
+            (line.endsWith('`') && line.lastIndexOf('`') !== startOfMultiline + 1)
+          ) {
             return { lines: lines.concat(line), currentMultiLine: null };
           } else {
             return { lines, currentMultiLine: line };
@@ -51,7 +56,7 @@ function parse(src) {
       },
       { lines: [], currentMultiLine: null }
     )
-    .lines.forEach(function(line) {
+    .lines.forEach(function (line) {
       // matching "KEY' and 'VAL' in 'KEY=VAL'
       const keyValueArr = line.match(/^\s*([\w.-]+)\s*=\s*([\s\S]*)?\s*/);
       // matched?
@@ -96,7 +101,7 @@ const loadEnvsFile = envPath => {
 };
 
 const setEnv = parsedEnv => {
-  Object.keys(parsedEnv).forEach(function(key) {
+  Object.keys(parsedEnv).forEach(function (key) {
     if (!process.env.hasOwnProperty(key)) {
       process.env[key] = parsedEnv[key];
     }

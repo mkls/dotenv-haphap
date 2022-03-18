@@ -79,7 +79,9 @@ test('parse', t => {
   t.equal(parsed.LOOKS_LIKE_AN_ITEM, undefined, 'does not parse item inside a multile item');
 
   t.equal(parsed.BACK_TICK_ON_SINGLE_LINE, '{}', 'parses backtick even if there is no linebreak in it');
-  t.equal(parsed.AFTER_SINGLE_LINE_BACK_TICK, '12', 'parses correctly after single line back ticks')
+  t.equal(parsed.AFTER_SINGLE_LINE_BACK_TICK, '12', 'parses correctly after single line back ticks');
+
+  t.equal(parsed.MULTILINE_WITH_EMPTY_FIRST_LINE, '\n{}\n', 'parses backtick even first line is empty');
 
   t.end();
 });
